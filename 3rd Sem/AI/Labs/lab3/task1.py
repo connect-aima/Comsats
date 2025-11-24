@@ -1,0 +1,43 @@
+graph = {'A':['B','C','D'],
+         'B':['E','F'],
+         'C':['G','H'],
+         'D':['I','J'],
+         'E':['K','L'],
+         'F':['L','M'],
+         'G':['N'],
+         'H':['O','P'],
+         'I':['P','Q'],
+         'J':['R'],
+         'K':['S'],
+         'L':['T'],
+         'P':['U'],
+         'S':[],
+         'T':[],
+         'M':[],
+         'N':[],
+         'O':[],
+         'U':[],
+         'Q':[],
+         'R':[]}
+
+def bfs_traversal(graph, start, goal):
+
+    opened = [start]
+    closed = []
+
+    while opened:
+        #Remove leftmost child from the opened list and call it node
+        node = opened.pop(0)
+        #If node is goal then return SUCCESS alogn with the traversal sequence.
+        if node == goal:
+          closed.append(node)
+          return "SUCCESS", closed
+        else:
+            #Add node to closed
+            closed.append(node)
+            #Generate children of node. If they are already present in opened, discard them, else push them on right end of opened
+            opened = opened + [child for child in graph[node] if child not in opened and child not in closed]
+    return 'GOAL Not FOUND'
+
+msg, bfsTraversal = bfs_traversal(graph,'A','M')
+print(msg,"\nBFS Traversal = ", bfsTraversal)
