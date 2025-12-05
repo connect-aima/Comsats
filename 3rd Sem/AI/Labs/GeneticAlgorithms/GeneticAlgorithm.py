@@ -7,7 +7,7 @@ def create_8_queens_board():
 
     # Place queens (represented by 'Q') on the board
     for row in range(0,8):
-      col = random.randint(0, 7)
+      col = random.randint(0, 7) 
       print(row,col)
       queens_board[row, col] = 'Q'
 
@@ -32,14 +32,14 @@ def calculate_fitness_numpy(board):
     #print('num_queens',num_queens)
 
     # Extract rows and columns
-    #rows = queens_positions[:, 0]
+    rows = queens_positions[:, 0]
     cols = queens_positions[:, 1]
 
     #print(rows)
     print('cols',cols)
     #print(rows-cols)
     #print(rows+cols)
-
+    
     #num_queens = 8
 
     # Count attacking pairs
@@ -53,12 +53,29 @@ def calculate_fitness_numpy(board):
     #row_attacks = num_queens - len(np.unique(rows))  # Count rows with multiple queens
     col_attacks = num_queens - len(unique_only)  # Count columns with multiple queens
     print(col_attacks)
+    # diagnol attack
+    
+    diagonal_attacks = 0
+    for i in range(num_queens):
+        for j in range(i + 1, num_queens):
 
-    # Total attacking pairs
-    total_attacks = col_attacks #+ main_diagonal_attacks
-    # Fitness is the number of non-attacking queens
-    fitness = num_queens - total_attacks
+        
+            if abs(rows[i] - rows[j]) == abs(cols[i] - cols[j]):
+                diagonal_attacks += 1
+
+    print("Diagonal attacks:", diagonal_attacks)
+
+    
+    total_attacks = col_attacks + diagonal_attacks
+
+
+    fitness = 8 - total_attacks
     return fitness
+    # # Total attacking pairs
+    # total_attacks = col_attacks #+ main_diagonal_attacks
+    # # Fitness is the number of non-attacking queens
+    # fitness = num_queens - total_attacks
+    # return fitness
 
 
 board1 = create_8_queens_board()
@@ -136,6 +153,18 @@ def single_point_crossover(parent1, parent2):
     offspring2 = np.concatenate((parent2[:crossover_point], parent1[crossover_point:]))
 
     return offspring1, offspring2
+
+def mutate(chromosome):
+    
+    index = random.randint(0, 7)
+
+    
+    new_value = random.randint(0, 7)
+
+    print(f"Mutating index {index} → {new_value}")
+
+    chromosome[index] = new_value
+    return chromosome
 
 # Example parent chromosomes from your 8-queen boards
 #parent1 = np.array([2, 5, 3, 6, 2, 6, 2, 7])  # Fitness 3

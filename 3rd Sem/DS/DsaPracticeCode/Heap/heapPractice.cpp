@@ -1,12 +1,21 @@
+//heap is a complete binary tree (node at each level has exactly two child except possibly the node on second last level and last level leafs are as left as possible
+//we present heap as array )
+//max heap parent is greater than or equal to  child node
+//min heap parent is less than or equal child node
+//we usually have 1 based indexing in heap
+//parent i/2
+//left child 2*i
+//right child 2*i+1
 #include <iostream>
 using namespace std;
 class Heap
-{
+{ 
 public:
     int arr[100];
     int size = 0;
 
     // inserting values in heap
+    // we are inserting a node comparing it with its parent then adjust its placement so it is heapify up
     void insert(int val)
     {
         // insert value at last and keep swapping from parent to maintain heap property
@@ -18,10 +27,10 @@ public:
         {
             // maintaining max heap
             int parent = index / 2;       // mark parent
-            if (arr[parent] < arr[index]) // check if parent is less then swap it from its child
+            if (arr[parent] < arr[index]) // check if parent is less then swap it from its child , actually i am maintaining max heap in this code
             {
                 swap(arr[parent], arr[index]);
-                index = parent; // move index to parent
+                index = parent; // move index to parent to keeping correcting amx heap property through entire heap
             }
             else
             {
@@ -33,7 +42,7 @@ public:
     // deletion from heap
     // deletion from heap work as deletion in priority queue
     // top most value gets deleted and remaining values adjust
-    // according to defined heap property
+    // according to defined heap property(max heap in my case)
     void deleteFromHeap()
     {
         // checking if heap exists or not
@@ -42,9 +51,10 @@ public:
             cout << "Nothing to delete" << endl;
             return;
         }
-        arr[1] = arr[size]; // replacing first(root) index from last one
-        size--;             // deleting last index (decreasing size)
+        arr[1] = arr[size]; // replacing first(root) element from element on last index
+        size--;             // deleting last index (decreasing size) //bcz last element is now coppied in root
         // code for propagating root to its correct condition maintain heap property
+        //we are actually performing heapify down to restore max heap property
         int i = 1; // mark root as i
         while (true)
         {
@@ -134,7 +144,7 @@ int main()
             cout << arr[i] << " ";
         }
         cout << endl;
-    //sorting this array in accendin order in which max heap is already created.
+    //sorting this array(in which max heap is already created) in accending order .
     h.heapSort(arr,5);
     //printing accending sorted array now
     cout << "Sorted array is as follows (accending sort using max heapified array)" << endl;
