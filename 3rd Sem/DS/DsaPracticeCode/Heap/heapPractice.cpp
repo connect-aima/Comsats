@@ -1,3 +1,6 @@
+//Almost Complete Binary Tree(wesy hi likh diya confuse ho ri thi it has nothing to do with heap)
+// A binary tree where all levels except the last two are completely filled,
+// and the last level may not be left-aligned.
 //heap is a complete binary tree (node at each level has exactly two child except possibly the node on second last level and last level leafs are as left as possible
 //we present heap as array )
 //max heap parent is greater than or equal to  child node
@@ -6,6 +9,11 @@
 //parent i/2
 //left child 2*i
 //right child 2*i+1
+//in case 0th index based
+// Parent index     = (i - 1) / 2
+// Left child index = 2*i + 1
+// Right child index= 2*i + 2
+
 #include <iostream>
 using namespace std;
 class Heap

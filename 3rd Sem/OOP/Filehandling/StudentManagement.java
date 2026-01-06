@@ -17,9 +17,7 @@ import java.util.List;
        for (String course : courses) {
            System.out.println("Course: " + course);
        }
-    }
-
-    
+    }  
 }
 public class StudentManagement {
     public static void main(String[] args) {

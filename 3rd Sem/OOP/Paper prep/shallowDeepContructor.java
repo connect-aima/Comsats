@@ -1,37 +1,51 @@
-class Student {
+class Address{
+    String city;
+    Address(String c){
+        city=c;
+    }
+    Address(Address other){
+        city=other.city;
+    }
+    @Override
+    
+    public String toString() {
+        return city;
+    }
+
+}
+class Student{
     String name;
-    int[] grades;
-    Student(String name, int[] grades) {
-        this.name = name;
-        this.grades = grades;
+    Address add;
+    Student(String n,Address add){
+        name=n;
+        this.add=add;
     }
-    // Shallow copy constructor
-    //copied object is sharing the reference of array with original object , changes in one will reflect in other
-    // Student(Student s) {
-    //     this.name = s.name;
-    //     this.grades = s.grades; // Shallow copy of the grades array
+    //shallow copy constructor
+    // Student(Student other){
+    //     name=other.name;
+    //     add=other.add;
     // }
-    //deep copy constructor
-    //copied object has its own copy of array , changes in one will not reflect in other
-   // Deep copy constructor
-Student(Student s) {
-    this.name = s.name;   // String is immutable → safe to copy reference
+    //deep copy 
+    Student(Student other){
+        name=other.name;
+        add=new Address(other.add);
+    }
 
-    this.grades = new int[s.grades.length]; // create new array
-    for (int i = 0; i < s.grades.length; i++) {
-        this.grades[i] = s.grades[i];       // copy values
+    //display
+    void print(){
+        System.out.println(name+" "+add);
     }
 }
 
-}
+
 public class shallowDeepContructor {
-    public static void main(String[] args) {
-        Student Aima = new Student("Aima", new int[]{90, 80, 85});
-        Student abdullah = new Student(Aima); // Using shallow copy constructor
-        // Modifying the grades array in the original object
-        Aima.grades[0] = 100;
-        // Both original and shallowCopy reflect the change
-        System.out.println("Aima grades: " + Aima.grades[0]); // Outputs 100
-        System.out.println("Abdullah Copy grades: " + abdullah.grades[0]); // Outputs 100
-    }
+   public static void main(String[] args) {
+    Address add=new Address("isb");
+    Student s1=new Student("Aima",add);
+    Student s2=new Student(s1);
+    s2.name="Abdullah";
+    s2.add.city = "mandi";
+    s1.print();
+    s2.print();
+   }
 }

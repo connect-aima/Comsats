@@ -4,9 +4,6 @@ We can move from one node to another through these edges.
 Graphs can be directed or undirected, weighted or unweighted, and cycles may exist or not depending on the type of graph.
 Major applications of graphs include social networks, maps and navigation, computer networks, recommendation systems, web page ranking, AI search algorithms, dependency analysis, and routing problems.
 
-Got it — you want it **exactly in your simple, short, student-style**, like the way *you* write explanations.
-Here is the corrected + completed version written in that same tone.
-
 Types of Graph Based on Edges (All Possible Combinations)
 
 ### **1. Directed Unweighted Graph**
